@@ -1,12 +1,36 @@
 <Application xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:dialogHostAvalonia="using:DialogHostAvalonia"
-             x:Class="AvaloniaDialogs.Demo.App"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-
-    <Application.Styles>
-        <FluentTheme />
+			 x:Class="AvaloniaDialogs.Demo.App"
+			 RequestedThemeVariant="Default">
+	<!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+	
+	<Application.Styles>
+		<FluentTheme />
 		<dialogHostAvalonia:DialogHostStyles/>
 	</Application.Styles>
+
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.ThemeDictionaries>
+				<ResourceDictionary x:Key="Light">
+					<SolidColorBrush x:Key="BackgroundBrush"
+									 Color="White"/>
+					<SolidColorBrush x:Key="BackgroundHighlightedBrush"
+									 Color="#ccc"/>
+					<SolidColorBrush x:Key="CustomSnackbarBrush"
+									 Color="#aaa"/>
+				</ResourceDictionary>
+				<ResourceDictionary x:Key="Dark">
+					<SolidColorBrush x:Key="BackgroundBrush"
+									 Color="Black"/>
+					<SolidColorBrush x:Key="BackgroundHighlightedBrush"
+									 Color="#555"/>
+					<SolidColorBrush x:Key="CustomSnackbarBrush"
+									 Color="#666"/>
+				</ResourceDictionary>
+			</ResourceDictionary.ThemeDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
+
 </Application>

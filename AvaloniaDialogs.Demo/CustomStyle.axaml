@@ -1,0 +1,62 @@
+﻿<!-- This demonstrates how to style the dialogs-->
+<Styles xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:dialogs="using:AvaloniaDialogs.Views">
+	<Design.PreviewWith>
+		<Border Padding="20">
+			<!-- Add Controls for Previewer Here -->
+		</Border>
+	</Design.PreviewWith>
+
+	<!--Dialogs-->
+	<Style Selector=":is(dialogs|BaseDialog) Button">
+		<Setter Property="Background"
+				Value="{DynamicResource BackgroundBrush}"/>
+		<Setter Property="VerticalContentAlignment"
+				Value="Center"/>
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center"/>
+		<Setter Property="Cursor"
+				Value="Hand"/>
+	</Style>
+	<Style Selector=":is(dialogs|BaseDialog) Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+		<Setter Property="Background"
+				Value="{DynamicResource BackgroundHighlightedBrush}"/>
+	</Style>
+	<Style Selector="dialogs|SingleActionDialog">
+		<Setter Property="HorizontalButtonAlignment"
+				Value="Stretch"/>
+		<Setter Property="ButtonMargin"
+				Value="0 8 0 0"/>
+	</Style>
+	<Style Selector="dialogs|TwofoldDialog">
+		<Setter Property="HorizontalButtonAlignment"
+				Value="Stretch"/>
+		<Setter Property="ButtonMargin"
+				Value="0 8 0 0"/>
+	</Style>
+	<Style Selector="dialogs|ThreefoldDialog">
+		<Setter Property="NeutralButtonSpacerWidth"
+				Value="0"/>
+		<Setter Property="NeutralButtonWidth"
+				Value="*"/>
+		<Setter Property="NegativeButtonWidth"
+				Value="*"/>
+		<Setter Property="PositiveButtonWidth"
+				Value="*"/>
+		<Setter Property="ButtonMargin"
+				Value="0 8 0 0"/>
+	</Style>
+
+	<!--Snackbar-->
+	<Style Selector="dialogs|Snackbar">
+		<Setter Property="Background"
+				Value="{DynamicResource CustomSnackbarBrush}"/>
+	</Style>
+	<Style Selector="dialogs|Snackbar Button">
+		<Setter Property="Background"
+				Value="{DynamicResource CustomSnackbarBrush}"/>
+		<Setter Property="Padding"
+				Value="8"/>
+	</Style>
+</Styles>

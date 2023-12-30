@@ -12,12 +12,12 @@
 	<DockPanel>
 		<Grid DockPanel.Dock="Bottom"
 			  Name="PART_GridButtons"
-			  HorizontalAlignment="Right"
+			  HorizontalAlignment="{Binding HorizontalButtonAlignment}"
 			  ColumnDefinitions="*">
 			<Button Grid.Column="0"
 					Name="DialogButton"
 					Content="{Binding ButtonText}"
-					Margin="8"
+					Margin="{Binding ButtonMargin}"
 					HorizontalAlignment="Stretch"
 					Click="ButtonClicked"/>
 		</Grid>

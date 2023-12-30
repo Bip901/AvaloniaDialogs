@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Interactivity;
 
 namespace AvaloniaDialogs.Views;
@@ -50,6 +51,51 @@ public partial class ThreefoldDialog : BaseDialog<ThreefoldDialog.ButtonType>
     {
         get { return GetValue(NeturalTextProperty); }
         set { SetValue(NeturalTextProperty, value); }
+    }
+
+    public static readonly StyledProperty<Thickness> ButtonMarginProperty =
+    AvaloniaProperty.Register<SingleActionDialog, Thickness>(nameof(ButtonMargin), new Thickness(8));
+
+    public Thickness ButtonMargin
+    {
+        get { return GetValue(ButtonMarginProperty); }
+        set { SetValue(ButtonMarginProperty, value); }
+    }
+
+    public static readonly StyledProperty<GridLength> NeutralButtonSpacerWidthProperty =
+    AvaloniaProperty.Register<SingleActionDialog, GridLength>(nameof(NeutralButtonSpacerWidth), GridLength.Star);
+
+    public GridLength NeutralButtonSpacerWidth
+    {
+        get { return GetValue(NeutralButtonSpacerWidthProperty); }
+        set { SetValue(NeutralButtonSpacerWidthProperty, value); }
+    }
+
+    public static readonly StyledProperty<GridLength> NeutralButtonWidthProperty =
+    AvaloniaProperty.Register<SingleActionDialog, GridLength>(nameof(NeutralButtonWidth), GridLength.Auto);
+
+    public GridLength NeutralButtonWidth
+    {
+        get { return GetValue(NeutralButtonWidthProperty); }
+        set { SetValue(NeutralButtonWidthProperty, value); }
+    }
+
+    public static readonly StyledProperty<GridLength> PositiveButtonWidthProperty =
+    AvaloniaProperty.Register<SingleActionDialog, GridLength>(nameof(PositiveButtonWidth), GridLength.Auto);
+
+    public GridLength PositiveButtonWidth
+    {
+        get { return GetValue(PositiveButtonWidthProperty); }
+        set { SetValue(PositiveButtonWidthProperty, value); }
+    }
+
+    public static readonly StyledProperty<GridLength> NegativeButtonWidthProperty =
+    AvaloniaProperty.Register<SingleActionDialog, GridLength>(nameof(NegativeButtonWidth), GridLength.Auto);
+
+    public GridLength NegativeButtonWidth
+    {
+        get { return GetValue(NegativeButtonWidthProperty); }
+        set { SetValue(NegativeButtonWidthProperty, value); }
     }
 
     public ThreefoldDialog()

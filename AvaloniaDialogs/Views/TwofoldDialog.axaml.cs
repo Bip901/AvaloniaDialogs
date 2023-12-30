@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Interactivity;
+using Avalonia.Layout;
 
 namespace AvaloniaDialogs.Views;
 
@@ -33,6 +34,24 @@ public partial class TwofoldDialog : BaseDialog<bool>
     {
         get { return GetValue(NegativeTextProperty); }
         set { SetValue(NegativeTextProperty, value); }
+    }
+
+    public static readonly StyledProperty<HorizontalAlignment> HorizontalButtonAlignmentProperty =
+    AvaloniaProperty.Register<SingleActionDialog, HorizontalAlignment>(nameof(HorizontalButtonAlignment), HorizontalAlignment.Right);
+
+    public HorizontalAlignment HorizontalButtonAlignment
+    {
+        get { return GetValue(HorizontalButtonAlignmentProperty); }
+        set { SetValue(HorizontalButtonAlignmentProperty, value); }
+    }
+
+    public static readonly StyledProperty<Thickness> ButtonMarginProperty =
+    AvaloniaProperty.Register<SingleActionDialog, Thickness>(nameof(ButtonMargin), new Thickness(8));
+
+    public Thickness ButtonMargin
+    {
+        get { return GetValue(ButtonMarginProperty); }
+        set { SetValue(ButtonMarginProperty, value); }
     }
 
     public TwofoldDialog()

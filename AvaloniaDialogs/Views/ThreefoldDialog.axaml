@@ -12,24 +12,29 @@
 	<DockPanel>
 		<Grid DockPanel.Dock="Bottom"
 			  Name="PART_GridButtons"
-			  HorizontalAlignment="Stretch"
-			  ColumnDefinitions="Auto * Auto Auto">
+			  HorizontalAlignment="Stretch">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="{Binding NeutralButtonWidth}"/>
+				<ColumnDefinition Width="{Binding NeutralButtonSpacerWidth}"/>
+				<ColumnDefinition Width="{Binding NegativeButtonWidth}"/>
+				<ColumnDefinition Width="{Binding PositiveButtonWidth}"/>
+			</Grid.ColumnDefinitions>
 			<Button Grid.Column="0"
 					Name="NeturalButton"
 					Content="{Binding NeturalText}"
-					Margin="8"
+					Margin="{Binding ButtonMargin}"
 					HorizontalAlignment="Stretch"
 					Click="NeutralButtonClicked"/>
 			<Button Grid.Column="2"
 					Name="NegativeButton"
 					Content="{Binding NegativeText}"
-					Margin="8"
+					Margin="{Binding ButtonMargin}"
 					HorizontalAlignment="Stretch"
 					Click="NegativeButtonClicked"/>
 			<Button Grid.Column="3"
 					Name="PositiveButton"
 					Content="{Binding PositiveText}"
-					Margin="8"
+					Margin="{Binding ButtonMargin}"
 					HorizontalAlignment="Stretch"
 					Click="PositiveButtonClicked"/>
 		</Grid>

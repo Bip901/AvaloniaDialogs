@@ -8,6 +8,11 @@
 		d:DesignHeight="450"
 		x:Class="AvaloniaDialogs.Demo.MainWindow"
 		Title="AvaloniaDialogs.Demo">
+	<Window.Resources>
+		<ResourceDictionary>
+			<StyleInclude x:Key="CustomStyle" Source="/CustomStyle.axaml"/>
+		</ResourceDictionary>
+	</Window.Resources>
 	<dialogs:ReactiveDialogHost CloseOnClickAway="True">
 		<Grid>
 			<StackPanel Orientation="Vertical">
@@ -23,7 +28,7 @@
 				<Button Content="Show Save/Discard/Cancel Dialog"
 						Click="SaveDiscardCancelDialogButton_Click"
 						Margin="8"/>
-				<ToggleSwitch Content="Custom Theme Demonstration"
+				<ToggleSwitch Content="Use Custom Dialog Theme"
 							  Margin="8"
 							  IsCheckedChanged="SwitchCustomTheme_IsCheckedChanged"/>
 			</StackPanel>

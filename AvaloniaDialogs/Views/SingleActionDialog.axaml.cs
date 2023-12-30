@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Interactivity;
+using Avalonia.Layout;
 using System;
 
 namespace AvaloniaDialogs.Views;
@@ -25,6 +26,24 @@ public partial class SingleActionDialog : BaseDialog<EventArgs>
     {
         get { return GetValue(ButtonTextProperty); }
         set { SetValue(ButtonTextProperty, value); }
+    }
+
+    public static readonly StyledProperty<HorizontalAlignment> HorizontalButtonAlignmentProperty =
+    AvaloniaProperty.Register<SingleActionDialog, HorizontalAlignment>(nameof(HorizontalButtonAlignment), HorizontalAlignment.Right);
+
+    public HorizontalAlignment HorizontalButtonAlignment
+    {
+        get { return GetValue(HorizontalButtonAlignmentProperty); }
+        set { SetValue(HorizontalButtonAlignmentProperty, value); }
+    }
+
+    public static readonly StyledProperty<Thickness> ButtonMarginProperty =
+    AvaloniaProperty.Register<SingleActionDialog, Thickness>(nameof(ButtonMargin), new Thickness(8));
+
+    public Thickness ButtonMargin
+    {
+        get { return GetValue(ButtonMarginProperty); }
+        set { SetValue(ButtonMarginProperty, value); }
     }
 
     public SingleActionDialog()

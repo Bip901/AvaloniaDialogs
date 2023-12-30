@@ -3,7 +3,6 @@ using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.LogicalTree;
 using DialogHostAvalonia;
-using System;
 using System.Threading.Tasks;
 
 namespace AvaloniaDialogs.Views;
