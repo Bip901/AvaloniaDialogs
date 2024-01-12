@@ -4,17 +4,19 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.LogicalTree;
 using DialogHostAvalonia;
+using System;
 using System.Threading.Tasks;
 
 namespace AvaloniaDialogs.Views;
 
-
 /// <summary>
-/// A user-control which is meant to pop on the screen for some user action.
+/// A user-control which is meant to pop on the screen for some user action, and optionally returns a result..
 /// </summary>
+/// <remarks>For dialogs that return a result, inherit from <seealso cref="BaseDialog{TResult}"/> instead for type safety.</remarks>
 public abstract class BaseDialog : UserControl
 {
     private IInputElement? previousFocus;
+    private TaskCompletionSource<object?>? showNestedTask;
 
     /// <summary>
     /// Called before closing this dialog. Return false to cancel.
@@ -30,9 +32,55 @@ public abstract class BaseDialog : UserControl
         previousFocus?.Focus();
     }
 
-    public virtual void Close()
+    /// <summary>
+    /// Shows this dialog and waits until it's closed.
+    /// If you want the dialog's result in a type-safe way, use <see cref="BaseDialog{TResult}.ShowAsync"/> instead.
+    /// </summary>
+    public async Task<object?> ShowAsync(string? dialogIdentifier = null)
     {
-        DialogHost.Close(null, null);
+        DialogSession? currentSession = DialogHost.GetDialogSession(dialogIdentifier);
+        if (currentSession == null)
+        {
+            return await DialogHost.Show(this, dialogIdentifier);
+        }
+        else
+        {
+            return await ShowNestedAsync(currentSession);
+        }
+    }
+
+    private async Task<object?> ShowNestedAsync(DialogSession session)
+    {
+        object? previousContent = session.Content;
+        showNestedTask = new((session, previousContent));
+        session.UpdateContent(this);
+        return await showNestedTask.Task.ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Closes this dialog without returning a result.
+    /// </summary>
+    public void Close()
+    {
+        Close(null);
+    }
+
+    protected void Close(object? result)
+    {
+        if (showNestedTask != null)
+        {
+            (DialogSession session, object? previousContent) = (ValueTuple<DialogSession, object?>)showNestedTask.Task.AsyncState!;
+            if (previousContent != null)
+            {
+                session.UpdateContent(previousContent);
+            }
+            showNestedTask.TrySetResult(result);
+            showNestedTask = null;
+        }
+        else
+        {
+            DialogHost.Close(null, result);
+        }
     }
 
     protected override void OnAttachedToLogicalTree(LogicalTreeAttachmentEventArgs e)
@@ -55,23 +103,23 @@ public abstract class BaseDialog : UserControl
 }
 
 /// <summary>
-/// A user-control which is meant to pop on the screen for some user action.
+/// A user-control which is meant to pop on the screen for some user action, and optionally returns a result.
 /// </summary>
 public abstract class BaseDialog<TResult> : BaseDialog
 {
     /// <summary>
     /// Shows this dialog and returns the result, or null if it was closed without a result (e.g. by an "Escape" press).
     /// </summary>
-    public virtual async Task<Optional<TResult>> ShowAsync()
+    public new async Task<Optional<TResult>> ShowAsync(string? dialogIdentifier = null)
     {
-        object? result = await DialogHost.Show(this, (string?)null);
+        object? result = await base.ShowAsync(dialogIdentifier);
         if (result == null)
             return Optional<TResult>.Empty;
         return new Optional<TResult>((TResult)result);
     }
 
-    protected virtual void Close(TResult result)
+    protected void Close(TResult result)
     {
-        DialogHost.Close(null, result);
+        base.Close(result);
     }
 }

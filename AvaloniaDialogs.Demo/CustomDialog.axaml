@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+			 Width="400"
+             x:Class="AvaloniaDialogs.Demo.CustomDialog">
+	<StackPanel Orientation="Vertical"
+				Margin="8">
+		<TextBlock Text="It's very easy to create custom dialogs!"
+				   FontSize="16"/>
+		<DockPanel Margin="0 8 0 0">
+			<TextBlock Text="Awesomeness:"
+					   Margin="0 8 8 8"
+					   DockPanel.Dock="Left"
+					   VerticalAlignment="Center"
+					   FontWeight="Bold"/>
+			<Slider x:Name="SliderAwesomeness"/>
+		</DockPanel>
+		<Button Content="Save &amp; Close"
+				Click="ButtonConfirm_Click"/>
+	</StackPanel>
+</UserControl>

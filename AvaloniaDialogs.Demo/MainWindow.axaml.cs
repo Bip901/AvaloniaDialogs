@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Data;
 using Avalonia.Interactivity;
 using Avalonia.Styling;
 using AvaloniaDialogs.Views;
@@ -31,23 +32,26 @@ public partial class MainWindow : Window
     {
         SingleActionDialog dialog = new()
         {
-            Message = "Hello from C# code!",
+            Message = "Hello from C# code! Do you want to see a snackbar?",
             ButtonText = "Click me!"
         };
-        await dialog.ShowAsync();
+        if ((await dialog.ShowAsync()).HasValue)
+        {
+            Snackbar.Show("I'm a snackbar!", TimeSpan.FromSeconds(2), "I Know");
+        }
     }
 
     private async void YesNoDialogButton_Click(object? sender, RoutedEventArgs e)
     {
         TwofoldDialog dialog = new()
         {
-            Message = "Do you want to see a snackbar?",
+            Message = "Do you want to perform action X?",
             PositiveText = "Yes",
             NegativeText = "No"
         };
         if ((await dialog.ShowAsync()).GetValueOrDefault())
         {
-            Snackbar.Show("You pressed yes!", TimeSpan.FromSeconds(2), "I Know");
+            //User clicked "Yes"
         }
     }
 
@@ -62,5 +66,15 @@ public partial class MainWindow : Window
             NeturalText = "Cancel"
         };
         await dialog.ShowAsync();
+    }
+
+    private async void CustomDialogButton_Click(object? sender, RoutedEventArgs e)
+    {
+        CustomDialog dialog = new();
+        Optional<double> result = await dialog.ShowAsync();
+        if (result.HasValue)
+        {
+            Snackbar.Show($"You picked: {result.Value:0.00}", TimeSpan.FromSeconds(2));
+        }
     }
 }
