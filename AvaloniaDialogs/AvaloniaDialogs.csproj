@@ -10,10 +10,25 @@
 		<Title>AvaloniaDialogs</Title>
 		<Authors>Ori Almagor</Authors>
 		<Description>A library wrapping DialogHost.Avalonia, providing a more convenient API and built-in common dialogs such as a Yes/No popup and a snackbar.</Description>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<DocumentationFile>$(MSBuildProjectDirectory)/bin/$(Configuration)/$(TargetFramework)/AvaloniaDialogs.xml</DocumentationFile>
 	</PropertyGroup>
+
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="11.0.6" />
-		<PackageReference Include="Avalonia.Desktop" Version="11.0.6" />
-		<PackageReference Include="DialogHost.Avalonia" Version="0.7.7" />
+		<PackageReference Include="Avalonia"
+						  Version="11.0.6" />
+		<PackageReference Include="Avalonia.Desktop"
+						  Version="11.0.6" />
+		<PackageReference Include="DialogHost.Avalonia"
+						  Version="0.7.7" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 </Project>
