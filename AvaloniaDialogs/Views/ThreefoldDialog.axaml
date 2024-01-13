@@ -20,8 +20,8 @@
 				<ColumnDefinition Width="{Binding PositiveButtonWidth}"/>
 			</Grid.ColumnDefinitions>
 			<Button Grid.Column="0"
-					Name="NeturalButton"
-					Content="{Binding NeturalText}"
+					Name="NeutralButton"
+					Content="{Binding NeutralText}"
 					Margin="{Binding ButtonMargin}"
 					HorizontalAlignment="Stretch"
 					Click="NeutralButtonClicked"/>

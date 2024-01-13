@@ -44,13 +44,13 @@ public partial class ThreefoldDialog : BaseDialog<ThreefoldDialog.ButtonType>
     }
 
 
-    public static readonly StyledProperty<string> NeturalTextProperty =
-    AvaloniaProperty.Register<SingleActionDialog, string>(nameof(NeturalText));
+    public static readonly StyledProperty<string> NeutralTextProperty =
+    AvaloniaProperty.Register<SingleActionDialog, string>(nameof(NeutralText));
 
-    public string NeturalText
+    public string NeutralText
     {
-        get { return GetValue(NeturalTextProperty); }
-        set { SetValue(NeturalTextProperty, value); }
+        get { return GetValue(NeutralTextProperty); }
+        set { SetValue(NeutralTextProperty, value); }
     }
 
     public static readonly StyledProperty<Thickness> ButtonMarginProperty =

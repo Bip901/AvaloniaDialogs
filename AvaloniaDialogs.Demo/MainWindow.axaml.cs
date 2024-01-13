@@ -63,7 +63,7 @@ public partial class MainWindow : Window
             Message = "You have unsaved changes. Save?",
             PositiveText = "Save",
             NegativeText = "Discard",
-            NeturalText = "Cancel"
+            NeutralText = "Cancel"
         };
         await dialog.ShowAsync();
     }
