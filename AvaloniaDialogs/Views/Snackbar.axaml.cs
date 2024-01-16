@@ -9,8 +9,8 @@ namespace AvaloniaDialogs.Views;
 
 public partial class Snackbar : UserControl
 {
-    public const int DURATION_SHORT = 2000;
-    public const int DURATION_LONG = 3500;
+    public static readonly TimeSpan DURATION_SHORT = TimeSpan.FromSeconds(2.0);
+    public static readonly TimeSpan DURATION_LONG = TimeSpan.FromSeconds(4.0);
     private const string SNACKBAR_HIDING_PSEUDO_CLASS = ":hiding";
     private const string SNACKBAR_SHOWING_PSEUDO_CLASS = ":showing";
 
