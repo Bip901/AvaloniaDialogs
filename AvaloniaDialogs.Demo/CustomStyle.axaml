@@ -47,6 +47,14 @@
 		<Setter Property="ButtonMargin"
 				Value="0 8 0 0"/>
 	</Style>
+	<Style Selector="dialogs|LoadingDialog">
+		<Setter Property="HorizontalButtonAlignment"
+				Value="Stretch"/>
+	</Style>
+	<Style Selector="dialogs|LoadingDialog PathIcon#PART_Spinner">
+		<Setter Property="Foreground"
+				Value="#ADFF2F"/>
+	</Style>
 
 	<!--Snackbar-->
 	<Style Selector="dialogs|Snackbar">

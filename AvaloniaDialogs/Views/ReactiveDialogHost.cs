@@ -39,7 +39,7 @@ public class ReactiveDialogHost : DialogHost
         base.OnKeyDown(e);
         if (IsOpen && e.Key == CloseKey)
         {
-            IsOpen = false;
+            Close(Identifier);
             e.Handled = true;
         }
     }

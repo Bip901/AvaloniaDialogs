@@ -28,6 +28,9 @@
 				<Button Content="Show Save/Discard/Cancel Dialog"
 						Click="SaveDiscardCancelDialogButton_Click"
 						Margin="8"/>
+				<Button Content="Show Loading Dialog"
+						Click="LoadingDialogButton_Click"
+						Margin="8"/>
 				<Button Content="Show Custom Dialog"
 						Click="CustomDialogButton_Click"
 						Margin="8"/>

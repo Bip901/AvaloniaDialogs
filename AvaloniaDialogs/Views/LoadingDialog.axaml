@@ -1,0 +1,56 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:media="using:Avalonia.Media"
+			 xmlns:views="using:AvaloniaDialogs.Views"
+			 mc:Ignorable="d"
+			 Width="260"
+			 x:DataType="views:LoadingDialog"
+			 x:Class="AvaloniaDialogs.Views.LoadingDialog">
+	<UserControl.Resources>
+		<media:Geometry x:Key="IconLoading">M480-46q-90 0-168.969-34.076-78.968-34.075-137.924-93.031T80.076-311.031Q46-390 46-480q0-90.142 34.064-168.881t93-137.929Q232-846 311-880t169-34q26 0 44.5 18.5T543-851q0 26-18.5 44.5T480-788q-128.013 0-218.006 89.991Q172-608.018 172-480.009 172-352 261.991-262t218 90Q608-172 698-261.994 788-351.987 788-480q0-26 18.5-44.5T851-543q26 0 44.5 18.5T914-480q0 90-34.064 169.012t-93 138Q728-114 649.14-80 570.281-46 480-46Z</media:Geometry>
+	</UserControl.Resources>
+	<Grid RowDefinitions="* Auto"
+		  ColumnDefinitions="Auto *">
+		<PathIcon Data="{StaticResource IconLoading}"
+				  x:Name="PART_Spinner"
+				  Width="36"
+				  Height="36"
+				  Margin="16">
+			<PathIcon.Styles>
+				<Style Selector="PathIcon">
+					<Style.Animations>
+						<Animation Duration="0:0:1.500"
+								   IterationCount="Infinite">
+							<KeyFrame Cue="0%">
+								<Setter Property="RotateTransform.Angle"
+										Value="0"/>
+							</KeyFrame>
+							<KeyFrame Cue="100%">
+								<Setter Property="RotateTransform.Angle"
+										Value="360"/>
+							</KeyFrame>
+						</Animation>
+					</Style.Animations>
+				</Style>
+			</PathIcon.Styles>
+		</PathIcon>
+		<TextBlock Name="PART_Title"
+				   Text="{Binding Message}"
+				   TextWrapping="Wrap"
+				   Margin="8"
+				   Grid.Column="1"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center"/>
+		<Button Name="ButtonCancel"
+				Content="{Binding ButtonCancelText}"
+				IsEnabled="{Binding IsCancellationAllowed}"
+				IsVisible="{Binding IsCancellable, Mode=OneTime}"
+				Click="ButtonCancel_Clicked"
+				Grid.ColumnSpan="2"
+				Grid.Row="1"
+				HorizontalAlignment="{Binding HorizontalButtonAlignment}"
+				Margin="8"/>
+	</Grid>
+</UserControl>

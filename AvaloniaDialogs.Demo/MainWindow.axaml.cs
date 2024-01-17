@@ -4,6 +4,8 @@ using Avalonia.Interactivity;
 using Avalonia.Styling;
 using AvaloniaDialogs.Views;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AvaloniaDialogs.Demo;
 
@@ -55,7 +57,6 @@ public partial class MainWindow : Window
         }
     }
 
-
     private async void SaveDiscardCancelDialogButton_Click(object? sender, RoutedEventArgs e)
     {
         ThreefoldDialog dialog = new()
@@ -66,6 +67,31 @@ public partial class MainWindow : Window
             NeutralText = "Cancel"
         };
         await dialog.ShowAsync();
+    }
+
+    private async void LoadingDialogButton_Click(object? sender, RoutedEventArgs e)
+    {
+        CancellationTokenSource cancelSrc = new();
+        Task<int> countTo3Task = Task.Run(async () =>
+        {
+            int count = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                await Task.Delay(1000, cancelSrc.Token);
+                count++;
+            }
+            return count;
+        });
+        LoadingDialog dialog = new(countTo3Task, cancelSrc)
+        {
+            Message = "Counting for 3 seconds...",
+        };
+        var result = await dialog.ShowAsync();
+        Task<int> completedTask = (Task<int>)result.Value; // This is actually the same as countTo3Task. For demonstration purposes.
+        if (completedTask.IsCompletedSuccessfully)
+        {
+            Snackbar.Show($"Total count: {completedTask.Result}", Snackbar.DURATION_SHORT);
+        }
     }
 
     private async void CustomDialogButton_Click(object? sender, RoutedEventArgs e)
