@@ -72,26 +72,22 @@ public partial class MainWindow : Window
     private async void LoadingDialogButton_Click(object? sender, RoutedEventArgs e)
     {
         CancellationTokenSource cancelSrc = new();
-        Task<int> countTo3Task = Task.Run(async () =>
+        try
         {
-            int count = 0;
-            for (int i = 0; i < 3; i++)
+            int result = await LoadingDialog.DoAsync(async () =>
             {
-                await Task.Delay(1000, cancelSrc.Token);
-                count++;
-            }
-            return count;
-        });
-        LoadingDialog dialog = new(countTo3Task, cancelSrc)
-        {
-            Message = "Counting for 3 seconds...",
-        };
-        var result = await dialog.ShowAsync();
-        Task<int> completedTask = (Task<int>)result.Value; // This is actually the same as countTo3Task. For demonstration purposes.
-        if (completedTask.IsCompletedSuccessfully)
-        {
-            Snackbar.Show($"Total count: {completedTask.Result}", Snackbar.DURATION_SHORT);
+                int count = 0;
+                for (int i = 0; i < 3; i++)
+                {
+                    await Task.Delay(1000, cancelSrc.Token);
+                    count++;
+                }
+                return count;
+            }, "Counting for 3 seconds...", cancelSrc);
+            Snackbar.Show($"Total count: {result}", Snackbar.DURATION_SHORT);
         }
+        catch (OperationCanceledException)
+        { }
     }
 
     private async void CustomDialogButton_Click(object? sender, RoutedEventArgs e)

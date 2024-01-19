@@ -89,9 +89,9 @@ public partial class LoadingDialog : BaseDialog<Task>
     private readonly CancellationTokenSource? cancellationTokenSource;
 
     /// <summary>
-    /// Creates a new <see cref="LoadingDialog"/> which runs the given task.
+    /// Creates a new <see cref="LoadingDialog"/> which waits for the given task to complete.
     /// </summary>
-    /// <param name="task">The task to run.</param>
+    /// <param name="task">The task to wait for. Caller is responsible for calling <see cref="Task.Start()"/> (e.g. through <see cref="Task.Run(Action)"/>).</param>
     /// <param name="cancellationTokenSource">Optionally, a cancellation token to allow the user to cancel the task. Affects <see cref="IsCancellable"/>.</param>
     public LoadingDialog(Task task, CancellationTokenSource? cancellationTokenSource = null)
     {
@@ -99,6 +99,50 @@ public partial class LoadingDialog : BaseDialog<Task>
         this.task = task;
         this.cancellationTokenSource = cancellationTokenSource;
         DataContext = this;
+    }
+
+    /// <summary>
+    /// Queues <paramref name="func"/> to run on the thread pool, showing a <see cref="LoadingDialog"/> while it's running.
+    /// </summary>
+    /// <remarks>This is a convenience function over constructing <see cref="LoadingDialog"/> directly.</remarks>
+    /// <param name="func">The function to run. Its result will be returned from this function.</param>
+    /// <param name="message">The message to display in the loading dialog.</param>
+    /// <param name="cancellationTokenSource">Optionally, a cancellation token to allow the user to cancel the task.</param>
+    /// <param name="buttonCancelText">The text to display in the cancel button, or null to use the default value.</param>
+    /// <returns>A task that completes when <paramref name="func"/> is finished and the dialog is dismissed, containing the return value of <paramref name="func"/>.</returns>
+    /// <exception cref="OperationCanceledException"/>
+    public static async Task<T> DoAsync<T>(Func<Task<T>> func, string message, CancellationTokenSource? cancellationTokenSource = null, string? buttonCancelText = null)
+    {
+        return await DoAsync(Task.Run(func), message, cancellationTokenSource, buttonCancelText);
+    }
+
+    /// <summary>
+    /// Queues <paramref name="func"/> to run on the thread pool, showing a <see cref="LoadingDialog"/> while it's running.
+    /// </summary>
+    /// <remarks>This is a convenience function over constructing <see cref="LoadingDialog"/> directly.</remarks>
+    /// <param name="func">The function to run. Its result will be returned from this function.</param>
+    /// <param name="message">The message to display in the loading dialog.</param>
+    /// <param name="cancellationTokenSource">Optionally, a cancellation token to allow the user to cancel the task.</param>
+    /// <param name="buttonCancelText">The text to display in the cancel button, or null to use the default value.</param>
+    /// <returns>A task that completes when <paramref name="func"/> is finished and the dialog is dismissed, containing the return value of <paramref name="func"/>.</returns>
+    /// <exception cref="OperationCanceledException"/>
+    public static async Task<T> DoAsync<T>(Func<T> func, string message, CancellationTokenSource? cancellationTokenSource = null, string? buttonCancelText = null)
+    {
+        return await DoAsync(Task.Run(func), message, cancellationTokenSource, buttonCancelText);
+    }
+
+    private static async Task<T> DoAsync<T>(Task<T> task, string message, CancellationTokenSource? cancellationTokenSource = null, string? buttonCancelText = null)
+    {
+        LoadingDialog loadingDialog = new(task, cancellationTokenSource)
+        {
+            Message = message
+        };
+        if (buttonCancelText != null)
+        {
+            loadingDialog.ButtonCancelText = buttonCancelText;
+        }
+        await loadingDialog.ShowAsync();
+        return await task;
     }
 
     protected override async void OnLoaded(RoutedEventArgs e)
