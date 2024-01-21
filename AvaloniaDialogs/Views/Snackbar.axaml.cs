@@ -33,6 +33,21 @@ public partial class Snackbar : UserControl
     public static readonly StyledProperty<string> ActionTextProperty =
         AvaloniaProperty.Register<Snackbar, string>(nameof(ActionText), string.Empty);
 
+    /// <summary>
+    /// Called when this snackbar is showing (before the animation is finished).
+    /// </summary>
+    public event EventHandler<EventArgs>? Showing;
+
+    /// <summary>
+    /// Called when this snackbar is starting to hide (before the animation is finished).
+    /// </summary>
+    public event EventHandler<EventArgs>? Hiding;
+
+    /// <summary>
+    /// A token identifying the currently visible snackbar content.
+    /// </summary>
+    public object? Token { get; private set; }
+
     private CancellationTokenSource? cancelSource;
     private Action? clickAction;
 
@@ -51,14 +66,21 @@ public partial class Snackbar : UserControl
     /// <summary>
     /// Simulates the action button being clicked. If this snackbar is not visible, doesn't do anything.
     /// </summary>
-    public void TriggerAction()
+    /// <returns>Whether an action was performed.</returns>
+    public bool TriggerAction()
     {
+        bool triggered = false;
         if (ButtonAction.IsEffectivelyEnabled)
         {
-            clickAction?.Invoke();
+            if (clickAction != null)
+            {
+                clickAction.Invoke();
+                triggered = true;
+            }
             CancelTimeout();
             Hide();
         }
+        return triggered;
     }
 
     /// <summary>
@@ -69,12 +91,13 @@ public partial class Snackbar : UserControl
     /// <param name="duration">The duration after which to hide the snackbar. Recommended values: <seealso cref="DURATION_SHORT"/>, <seealso cref="DURATION_LONG"/></param>
     /// <param name="actionText">The text to show on the action button, or null to not include an action button.</param>
     /// <param name="action">The action to perform when the action button is clicked.</param>
-    public void Show(string text, TimeSpan duration, string? actionText = null, Action? action = null)
+    /// <param name="token">Optionally, a value for <see cref="Token"/> which will be kept as long as this snackbar is visible with this content.</param>
+    public void Show(string text, TimeSpan duration, string? actionText = null, Action? action = null, object? token = null)
     {
         Text = text;
         ActionText = actionText ?? string.Empty;
         clickAction = action;
-        Show();
+        Show(token);
         CancelTimeout();
         cancelSource = new CancellationTokenSource();
         CancellationToken cancelToken = cancelSource.Token;
@@ -92,12 +115,14 @@ public partial class Snackbar : UserControl
         });
     }
 
-    private void Show()
+    private void Show(object? token)
     {
         PseudoClasses.Remove(SNACKBAR_HIDING_PSEUDO_CLASS);
         PseudoClasses.Add(SNACKBAR_SHOWING_PSEUDO_CLASS);
         ButtonAction.Focusable = true;
         ButtonAction.IsEnabled = true;
+        Token = token;
+        Showing?.Invoke(this, EventArgs.Empty);
     }
 
     private void Hide()
@@ -106,6 +131,9 @@ public partial class Snackbar : UserControl
         PseudoClasses.Add(SNACKBAR_HIDING_PSEUDO_CLASS);
         ButtonAction.Focusable = false;
         ButtonAction.IsEnabled = false;
+        Hiding?.Invoke(this, EventArgs.Empty);
+        clickAction = null;
+        Token = null;
     }
 
     private void CancelTimeout()
