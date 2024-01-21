@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Threading;
 using System;
 using System.Threading;
@@ -42,11 +43,22 @@ public partial class Snackbar : UserControl
         ButtonAction.Click += ButtonAction_Click;
     }
 
-    private void ButtonAction_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void ButtonAction_Click(object? sender, RoutedEventArgs e)
     {
-        clickAction?.Invoke();
-        CancelTimeout();
-        Hide();
+        TriggerAction();
+    }
+
+    /// <summary>
+    /// Simulates the action button being clicked. If this snackbar is not visible, doesn't do anything.
+    /// </summary>
+    public void TriggerAction()
+    {
+        if (ButtonAction.IsEffectivelyEnabled)
+        {
+            clickAction?.Invoke();
+            CancelTimeout();
+            Hide();
+        }
     }
 
     /// <summary>
