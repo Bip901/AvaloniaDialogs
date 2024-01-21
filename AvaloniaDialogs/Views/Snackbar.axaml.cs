@@ -49,6 +49,14 @@ public partial class Snackbar : UserControl
         Hide();
     }
 
+    /// <summary>
+    /// Shows this snackbar with the given content.
+    /// </summary>
+    /// <remarks>If this snackbar is already visible, its content is immediately replaced and the timeout restarts.</remarks>
+    /// <param name="text">The text to display.</param>
+    /// <param name="duration">The duration after which to hide the snackbar. Recommended values: <seealso cref="DURATION_SHORT"/>, <seealso cref="DURATION_LONG"/></param>
+    /// <param name="actionText">The text to show on the action button, or null to not include an action button.</param>
+    /// <param name="action">The action to perform when the action button is clicked.</param>
     public void Show(string text, TimeSpan duration, string? actionText = null, Action? action = null)
     {
         Text = text;
@@ -76,12 +84,16 @@ public partial class Snackbar : UserControl
     {
         PseudoClasses.Remove(SNACKBAR_HIDING_PSEUDO_CLASS);
         PseudoClasses.Add(SNACKBAR_SHOWING_PSEUDO_CLASS);
+        ButtonAction.Focusable = true;
+        ButtonAction.IsEnabled = true;
     }
 
     private void Hide()
     {
         PseudoClasses.Remove(SNACKBAR_SHOWING_PSEUDO_CLASS);
         PseudoClasses.Add(SNACKBAR_HIDING_PSEUDO_CLASS);
+        ButtonAction.Focusable = false;
+        ButtonAction.IsEnabled = false;
     }
 
     private void CancelTimeout()
