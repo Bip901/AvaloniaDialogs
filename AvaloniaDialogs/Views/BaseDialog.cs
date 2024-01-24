@@ -26,6 +26,24 @@ public abstract class BaseDialog : UserControl
         return true;
     }
 
+    protected override void OnLoaded(RoutedEventArgs e)
+    {
+        base.OnLoaded(e);
+        IFocusManager? focusManager = TopLevel.GetTopLevel(this)?.FocusManager;
+        previousFocus = focusManager?.GetFocusedElement();
+        DoInitialFocus();
+    }
+
+    /// <summary>
+    /// Focus something in order to remove the focus from behind the dialog, otherwise the user may still interact with background elements using the keyboard
+    /// </summary>
+    /// <remarks>The default implementation focuses the first focusable child using DFS. If no such element was found, nothing is focused - this is undesirable behavior!</remarks>
+    protected virtual void DoInitialFocus()
+    {
+        InputElement? firstFocusableDescandant = (InputElement?)UIUtil.SelectLogicalDescendant(this, x => x is InputElement inputElement && inputElement.Focusable);
+        firstFocusableDescandant?.Focus();
+    }
+
     protected override void OnUnloaded(RoutedEventArgs e)
     {
         base.OnUnloaded(e);
@@ -81,24 +99,6 @@ public abstract class BaseDialog : UserControl
         {
             DialogHost.Close(null, result);
         }
-    }
-
-    protected override void OnAttachedToLogicalTree(LogicalTreeAttachmentEventArgs e)
-    {
-        base.OnAttachedToLogicalTree(e);
-        DoInitialFocus();
-    }
-
-    /// <summary>
-    /// Focus something in order to remove the focus from behind the dialog, otherwise the user may still interact with background elements using the keyboard
-    /// </summary>
-    /// <remarks>The default implementation focuses the first focusable child using DFS. If no such element was found, nothing is focused - this is undesirable behavior!</remarks>
-    protected virtual void DoInitialFocus()
-    {
-        IFocusManager? focusManager = TopLevel.GetTopLevel(this)?.FocusManager;
-        previousFocus = focusManager?.GetFocusedElement();
-        InputElement? firstFocusableDescandant = (InputElement?)UIUtil.SelectLogicalDescendant(this, x => x is InputElement inputElement && inputElement.Focusable);
-        firstFocusableDescandant?.FocusEventually();
     }
 }
 
