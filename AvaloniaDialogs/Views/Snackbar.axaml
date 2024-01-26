@@ -11,6 +11,8 @@
 			 VerticalAlignment="Bottom"
 			 Margin="16"
 			 CornerRadius="12"
+			 x:CompileBindings="True"
+			 x:DataType="local:Snackbar"
 			 x:Class="AvaloniaDialogs.Views.Snackbar">
 	<UserControl.Styles>
 		<Style Selector="local|Snackbar:showing">
