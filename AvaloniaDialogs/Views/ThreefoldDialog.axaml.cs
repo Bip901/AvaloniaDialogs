@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 
 namespace AvaloniaDialogs.Views;
@@ -117,5 +118,40 @@ public partial class ThreefoldDialog : BaseDialog<ThreefoldDialog.ButtonType>
     public void NeutralButtonClicked(object? sender, RoutedEventArgs e)
     {
         Close(ButtonType.Neutral);
+    }
+
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        base.OnKeyDown(e);
+        if (e.Key == Key.Left)
+        {
+            if (PositiveButton.IsFocused)
+            {
+                NegativeButton.Focus(NavigationMethod.Directional);
+            }
+            else if (NeutralButton.IsFocused)
+            {
+                PositiveButton.Focus(NavigationMethod.Directional);
+            }
+            else
+            {
+                NeutralButton.Focus(NavigationMethod.Directional);
+            }
+        }
+        else if (e.Key == Key.Right)
+        {
+            if (NeutralButton.IsFocused)
+            {
+                NegativeButton.Focus(NavigationMethod.Directional);
+            }
+            else if (NegativeButton.IsFocused)
+            {
+                PositiveButton.Focus(NavigationMethod.Directional);
+            }
+            else
+            {
+                NeutralButton.Focus(NavigationMethod.Directional);
+            }
+        }
     }
 }

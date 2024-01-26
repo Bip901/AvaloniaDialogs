@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 
@@ -58,6 +59,23 @@ public partial class TwofoldDialog : BaseDialog<bool>
     {
         InitializeComponent();
         DataContext = this;
+    }
+
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        base.OnKeyDown(e);
+        if (e.Key == Key.Left || e.Key == Key.Right)
+        {
+            if (NegativeButton.IsFocused)
+            {
+                PositiveButton.Focus(NavigationMethod.Directional);
+            }
+            else
+            {
+                NegativeButton.Focus(NavigationMethod.Directional);
+            }
+            e.Handled = true;
+        }
     }
 
     public void PositiveButtonClicked(object? sender, RoutedEventArgs e)
