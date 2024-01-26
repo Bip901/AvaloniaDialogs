@@ -5,6 +5,7 @@ using Avalonia.Interactivity;
 using Avalonia.LogicalTree;
 using DialogHostAvalonia;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace AvaloniaDialogs.Views;
@@ -17,6 +18,12 @@ public abstract class BaseDialog : UserControl
 {
     private IInputElement? previousFocus;
     private TaskCompletionSource<object?>? showNestedTask;
+
+    /// <summary>
+    /// Returns whether this dialog is being shown on top of another dialog.
+    /// </summary>
+    [MemberNotNullWhen(true, nameof(showNestedTask))]
+    internal bool IsShowingNested => showNestedTask != null;
 
     /// <summary>
     /// Called before closing this dialog. Return false to cancel.
@@ -83,9 +90,9 @@ public abstract class BaseDialog : UserControl
         Close(null);
     }
 
-    protected void Close(object? result)
+    protected internal void Close(object? result)
     {
-        if (showNestedTask != null)
+        if (IsShowingNested)
         {
             (DialogSession session, object? previousContent) = (ValueTuple<DialogSession, object?>)showNestedTask.Task.AsyncState!;
             if (previousContent != null)

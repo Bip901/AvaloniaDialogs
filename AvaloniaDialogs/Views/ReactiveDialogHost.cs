@@ -27,10 +27,19 @@ public class ReactiveDialogHost : DialogHost
     {
         if (DialogContent is BaseDialog dialog)
         {
-            if (!dialog.OnClosing())
+            //Nested dialogs closed properly through the wrappers in BaseDialog would never reach here.
+            //This means DialogHost.Close was called directly, e.g. by clicking away from the dialog.
+            //Cancel and call the proper Close() method to handle nested correctly.
+            if (dialog.IsShowingNested)
+            {
+                e.Cancel();
+                dialog.Close(e.Parameter);
+            }
+            else if (!dialog.OnClosing())
             {
                 e.Cancel();
             }
+            e.Handled = true;
         }
     }
 
