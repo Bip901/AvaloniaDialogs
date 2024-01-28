@@ -1,0 +1,33 @@
+<Window xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:dialogs="using:AvaloniaDialogs.Views"
+		mc:Ignorable="d"
+		d:DesignWidth="800"
+		d:DesignHeight="450"
+		x:Class="AvaloniaDialogs.Demo.MainWindow"
+		Title="AvaloniaDialogs.Demo">
+	<dialogs:ReactiveDialogHost CloseOnClickAway="True">
+		<Grid>
+			<StackPanel Orientation="Vertical">
+				<TextBlock Text="Welcome to AvaloniaDialogs!"
+						   FontSize="16"
+						   Margin="8"/>
+				<Button Content="Show Dialog"
+						Click="DialogButton_Click"
+						Margin="8"/>
+				<Button Content="Show Yes/No Dialog"
+						Click="YesNoDialogButton_Click"
+						Margin="8"/>
+				<Button Content="Show Save/Discard/Cancel Dialog"
+						Click="SaveDiscardCancelDialogButton_Click"
+						Margin="8"/>
+				<ToggleSwitch Content="Custom Theme Demonstration"
+							  Margin="8"
+							  IsCheckedChanged="SwitchCustomTheme_IsCheckedChanged"/>
+			</StackPanel>
+			<dialogs:Snackbar Name="Snackbar"/>
+		</Grid>
+	</dialogs:ReactiveDialogHost>
+</Window>

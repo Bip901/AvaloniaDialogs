@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:AvaloniaDialogs.Views"
+			 mc:Ignorable="d"
+			 Width="300"
+			 d:DesignHeight="120"
+			 x:CompileBindings="True"
+			 x:DataType="vm:SingleActionDialog"
+			 x:Class="AvaloniaDialogs.Views.SingleActionDialog">
+	<DockPanel>
+		<Grid DockPanel.Dock="Bottom"
+			  Name="PART_GridButtons"
+			  HorizontalAlignment="Right"
+			  ColumnDefinitions="*">
+			<Button Grid.Column="0"
+					Name="DialogButton"
+					Content="{Binding ButtonText}"
+					Margin="8"
+					HorizontalAlignment="Stretch"
+					Click="ButtonClicked"/>
+		</Grid>
+		<TextBlock Name="DialogMessage"
+				   Margin="8"
+				   TextWrapping="Wrap"
+				   Text="{Binding Message}"/>
+	</DockPanel>
+</UserControl>

@@ -1,0 +1,80 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:local="using:AvaloniaDialogs.Views"
+			 mc:Ignorable="d"
+			 d:DesignWidth="600"
+			 d:DesignHeight="64"
+			 MaxWidth="500"
+			 HorizontalAlignment="Center"
+			 VerticalAlignment="Bottom"
+			 Margin="16"
+			 CornerRadius="12"
+			 x:Class="AvaloniaDialogs.Views.Snackbar">
+	<UserControl.Styles>
+		<Style Selector="local|Snackbar:showing">
+			<Setter Property="IsVisible"
+					Value="True"/>
+			<Style.Animations>
+				<Animation Duration="0:0:0.3">
+					<KeyFrame Cue="0%">
+						<Setter Property="TranslateTransform.Y"
+								Value="25"/>
+						<Setter Property="Opacity"
+								Value="0.0"/>
+					</KeyFrame>
+					<KeyFrame Cue="100%">
+						<Setter Property="TranslateTransform.Y"
+								Value="0"/>
+						<Setter Property="Opacity"
+								Value="1.0"/>
+					</KeyFrame>
+				</Animation>
+			</Style.Animations>
+		</Style>
+		<Style Selector="local|Snackbar:hiding">
+			<Setter Property="IsVisible"
+					Value="False"/>
+			<Style.Animations>
+				<Animation Duration="0:0:0.3">
+					<KeyFrame Cue="0%">
+						<Setter Property="TranslateTransform.Y"
+								Value="0"/>
+						<Setter Property="Opacity"
+								Value="1"/>
+						<Setter Property="IsVisible"
+								Value="True"/>
+					</KeyFrame>
+					<KeyFrame Cue="100%">
+						<Setter Property="TranslateTransform.Y"
+								Value="25"/>
+						<Setter Property="Opacity"
+								Value="0.0"/>
+					</KeyFrame>
+				</Animation>
+			</Style.Animations>
+		</Style>
+		<Style Selector="local|Snackbar">
+			<Setter Property="IsVisible"
+					Value="False"/>
+		</Style>
+	</UserControl.Styles>
+	<Grid ColumnDefinitions="* Auto"
+		  RowDefinitions="Auto">
+		<TextBlock Grid.Column="0"
+				   Text="{Binding Text}"
+				   TextWrapping="WrapWithOverflow"
+				   Margin="16 8"
+				   VerticalAlignment="Center"
+				   HorizontalAlignment="Center"
+				   FontSize="16"/>
+		<Button x:Name="ButtonAction"
+				Grid.Column="1"
+				Margin="8"
+				Padding="8"
+				IsVisible="{Binding !!ActionText.Length}"
+				Content="{Binding ActionText}"
+				FontSize="16"/>
+	</Grid>
+</UserControl>

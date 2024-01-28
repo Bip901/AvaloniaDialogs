@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+		<Version>3.0.1</Version>
+		<AssemblyVersion></AssemblyVersion>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>AvaloniaDialogs</Title>
+		<Authors>Ori Almagor</Authors>
+		<Description>A library wrapping DialogHost.Avalonia, providing a more convenient API and built-in common dialogs such as a Yes/No popup and a snackbar.</Description>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="11.0.6" />
+		<PackageReference Include="Avalonia.Desktop" Version="11.0.6" />
+		<PackageReference Include="DialogHost.Avalonia" Version="0.7.7" />
+	</ItemGroup>
+</Project>
