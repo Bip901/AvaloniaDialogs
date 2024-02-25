@@ -13,6 +13,10 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/Bip901/AvaloniaDialogs</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/Bip901/AvaloniaDialogs</PackageProjectUrl>
+		<RepositoryType>Git</RepositoryType>
+		<PackageTags>avalonia xaml multi-platform gui control mvvm dialogs avaloniaui</PackageTags>
 		<DocumentationFile>$(MSBuildProjectDirectory)/bin/$(Configuration)/$(TargetFramework)/AvaloniaDialogs.xml</DocumentationFile>
 	</PropertyGroup>
 
