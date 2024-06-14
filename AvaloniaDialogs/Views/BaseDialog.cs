@@ -17,6 +17,7 @@ public abstract class BaseDialog : UserControl
 {
     private IInputElement? previousFocus;
     private TaskCompletionSource<object?>? showNestedTask;
+    private string? lastShowDialogHostIdentifier;
 
     /// <summary>
     /// Returns whether this dialog is being shown on top of another dialog.
@@ -65,6 +66,7 @@ public abstract class BaseDialog : UserControl
         DialogSession? currentSession = DialogHost.GetDialogSession(dialogIdentifier);
         if (currentSession == null)
         {
+            lastShowDialogHostIdentifier = dialogIdentifier;
             return await DialogHost.Show(this, dialogIdentifier);
         }
         else
@@ -103,7 +105,7 @@ public abstract class BaseDialog : UserControl
         }
         else
         {
-            DialogHost.Close(null, result);
+            DialogHost.Close(lastShowDialogHostIdentifier, result);
         }
     }
 }
