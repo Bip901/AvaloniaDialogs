@@ -2,7 +2,6 @@
 using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.LogicalTree;
 using DialogHostAvalonia;
 using System;
 using System.Diagnostics.CodeAnalysis;
