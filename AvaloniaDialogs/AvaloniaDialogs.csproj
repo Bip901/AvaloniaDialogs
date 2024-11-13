@@ -4,7 +4,7 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-		<Version>3.6.0</Version>
+		<Version>3.6.1</Version>
 		<AssemblyVersion></AssemblyVersion>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>AvaloniaDialogs</Title>
@@ -21,10 +21,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Avalonia"
-						  Version="11.1.0" />
-		<PackageReference Include="DialogHost.Avalonia"
-						  Version="0.8.1" />
+		<PackageReference Include="Avalonia" Version="11.1" />
+		<PackageReference Include="DialogHost.Avalonia" Version="[0.8.1,1.0.0)" />
 	</ItemGroup>
 
 	<ItemGroup>
