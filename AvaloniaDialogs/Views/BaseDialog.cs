@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace AvaloniaDialogs.Views;
 
 /// <summary>
-/// A user-control which is meant to pop on the screen for some user action, and optionally returns a result..
+/// A user-control which is meant to pop on the screen for some user action, and optionally returns a result.
 /// </summary>
 /// <remarks>For dialogs that return a result, inherit from <seealso cref="BaseDialog{TResult}"/> instead for type safety.</remarks>
 public abstract class BaseDialog : UserControl
