@@ -23,8 +23,6 @@
 	<ItemGroup>
 		<PackageReference Include="Avalonia"
 						  Version="11.1.0" />
-		<PackageReference Include="Avalonia.Desktop"
-						  Version="11.1.0" />
 		<PackageReference Include="DialogHost.Avalonia"
 						  Version="0.8.1" />
 	</ItemGroup>
