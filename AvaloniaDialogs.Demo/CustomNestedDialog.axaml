@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+			 Width="400"
+             x:Class="AvaloniaDialogs.Demo.CustomNestedDialog">
+	<StackPanel Orientation="Vertical"
+				Margin="8">
+		<TextBlock x:Name="TextTitle"
+				   TextWrapping="Wrap"
+				   FontSize="16"
+				   Margin="8 0 8 8"/>
+		<StackPanel Orientation="Horizontal">
+			<Button Content="Open Another"
+					Margin="0 0 8 0"
+					Click="ButtonOpenAnother_Click"/>
+			<Button Content="Close"
+					Click="ButtonClose_Click"/>			
+		</StackPanel>
+	</StackPanel>
+</UserControl>

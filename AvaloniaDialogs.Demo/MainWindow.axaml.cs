@@ -99,4 +99,10 @@ public partial class MainWindow : Window
             Snackbar.Show($"You picked: {result.Value:0.00}", TimeSpan.FromSeconds(2));
         }
     }
+
+    private async void NestedDialogButton_Click(object? sender, RoutedEventArgs e)
+    {
+        CustomNestedDialog nestedDialog = new();
+        await nestedDialog.ShowAsync();
+    }
 }
