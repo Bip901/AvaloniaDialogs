@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFrameworks>netstandard2.0;net6.0;net8.0;</TargetFrameworks>
 		<Nullable>enable</Nullable>
+        <LangVersion>13</LangVersion>
 		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-		<Version>3.6.1</Version>
+		<Version>3.7.0</Version>
 		<AssemblyVersion></AssemblyVersion>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>AvaloniaDialogs</Title>
@@ -26,7 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="README.md">
+		<None Include="README.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
