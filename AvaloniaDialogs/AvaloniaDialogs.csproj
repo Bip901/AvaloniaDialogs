@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
         <LangVersion>13</LangVersion>
 		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-		<Version>3.7.1</Version>
+		<Version>3.7.0</Version>
 		<AssemblyVersion></AssemblyVersion>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>AvaloniaDialogs</Title>
