@@ -58,7 +58,9 @@ public partial class LoadingDialog : BaseDialog<Task>
     /// Whether this dialog can be canceled at all. This property is read-only and defined by whether a <see cref="CancellationTokenSource"/> was passed to the constructor of this instance.
     /// </summary>
     /// <remarks>See also: <seealso cref="IsCancellationAllowed"/></remarks>
+#if NETCOREAPP
     [MemberNotNullWhen(true, nameof(cancellationTokenSource))]
+#endif
     public bool IsCancellable => cancellationTokenSource != null;
 
     /// <summary>
