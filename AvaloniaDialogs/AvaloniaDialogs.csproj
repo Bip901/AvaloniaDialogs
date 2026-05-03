@@ -3,14 +3,15 @@
 		<OutputType>Library</OutputType>
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
-        <LangVersion>13</LangVersion>
+		<LangVersion>13</LangVersion>
 		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 		<Version>3.7.1</Version>
 		<AssemblyVersion></AssemblyVersion>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>AvaloniaDialogs</Title>
 		<Authors>Ori Almagor</Authors>
-		<Description>A library wrapping DialogHost.Avalonia, providing a more convenient API and built-in common dialogs such as a Yes/No popup and a snackbar.</Description>
+		<Description>A library wrapping DialogHost.Avalonia, providing a more convenient API and
+			built-in common dialogs such as a Yes/No popup and a snackbar.</Description>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -18,12 +19,13 @@
 		<PackageProjectUrl>https://github.com/Bip901/AvaloniaDialogs</PackageProjectUrl>
 		<RepositoryType>Git</RepositoryType>
 		<PackageTags>avalonia xaml multi-platform gui control mvvm dialogs avaloniaui</PackageTags>
-		<DocumentationFile>$(MSBuildProjectDirectory)/bin/$(Configuration)/$(TargetFramework)/AvaloniaDialogs.xml</DocumentationFile>
+		<DocumentationFile>
+			$(MSBuildProjectDirectory)/bin/$(Configuration)/$(TargetFramework)/AvaloniaDialogs.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Avalonia" Version="12.0.1" />
-		<PackageReference Include="DialogHost.Avalonia" Version="[0.12.0,1.0.0]" />
+		<PackageReference Include="DialogHost.Avalonia" Version="[0.12.2,1.0.0]" />
 	</ItemGroup>
 
 	<ItemGroup>
