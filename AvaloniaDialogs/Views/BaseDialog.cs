@@ -22,9 +22,7 @@ public abstract class BaseDialog : UserControl
     /// <summary>
     /// Returns whether this dialog is being shown on top of another dialog.
     /// </summary>
-#if NETCOREAPP
     [MemberNotNullWhen(true, nameof(showNestedTask))]
-#endif
     internal bool IsShowingNested => showNestedTask != null;
 
     /// <summary>
